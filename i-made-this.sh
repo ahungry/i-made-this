@@ -110,16 +110,14 @@ fi
 
 git clone "${GIT}" "./${CLONE}" || (echo "Failed to clone repository, aborting." && exit 1)
 cd "${CLONE}"
-find -maxdepth 9 -type f -exec sed -i.imtbak -e "s/${NAME}/${NEW_NAME}/gi" {} \;
-find -maxdepth 9 -type f -name 'LICENSE*' -exec cp {} "${NEW_NAME}_LICENSE.md" \;
-[ -f "${NEW_NAME}_LICENSE.md" ] || cp ../LICENSE.md "${NEW_NAME}_LICENSE.md"
-sed -i.imtbak -e "s/${AUTHOR}/${YOU}/gi" "${NEW_NAME}_LICENSE.md"
-find -maxdepth 9 -type f -exec sed -i.imtbak -e "s/${AUTHOR}/${AUTHOR} (modifications copyright ${YOU})/gi" {} \;
+find -maxdepth 9 -type f -exec sed -i -e "s/${NAME}/${NEW_NAME}/gi" {} \;
+find -maxdepth 9 -type f -name 'LICENSE*' -exec cp {} "${CLONE}_LICENSE.md" \;
+[ -f "${NEW_NAME}_LICENSE.md" ] || cp ../LICENSE.md "${CLONE}_LICENSE.md"
+sed -i -e "s/${AUTHOR}/${YOU}/gi" "${CLONE}_LICENSE.md"
+find -maxdepth 9 -type f -exec sed -i -e "s/${AUTHOR}/${AUTHOR} (modifications copyright ${YOU})/gi" {} \;
 
-find -maxdepth 9 -type f -name 'README.md' -exec echo "See ${NEW_NAME}_LICENSE.md for additional copyright/license information" >> README.md \;
-find -maxdepth 9 -type f -name 'README.txt' -exec echo "See ${NEW_NAME}_LICENSE.md for additional copyright/license information" >> README.txt \;
-find -maxdepth 9 -type f -name 'README' -exec echo "See ${NEW_NAME}_LICENSE.md for additional copyright/license information" >> README \;
+find -maxdepth 9 -type f -name 'README.md' -exec echo "See ${CLONE}_LICENSE.md for additional copyright/license information" >> README.md \;
+find -maxdepth 9 -type f -name 'README.txt' -exec echo "See ${CLONE}_LICENSE.md for additional copyright/license information" >> README.txt \;
+find -maxdepth 9 -type f -name 'README' -exec echo "See ${CLONE}_LICENSE.md for additional copyright/license information" >> README \;
 
-echo "If all looks well, remove the backup sed files with:"
-echo ""
-echo "find -name '*.imtbak' -delete"
+echo "Congrats, you made it!"

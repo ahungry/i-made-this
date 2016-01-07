@@ -1,12 +1,21 @@
 # i made this
 
-Find a project with a repurposable license, and repurpose to your own
+Find a project with a free re-licensable license, and repurpose to your own.
+
+Great for padding your past accomplishments!
 
 ![i made this](http://weknowmemes.com/wp-content/uploads/2013/11/i-made-this-comic.jpg)
 
 http://weknowmemes.com/2013/11/i-made-this-meme/
 
 # Usage
+
+Only tested under GNU/Linux, requires:
+
+- bash
+- sed
+- find
+
 
 ```sh
 
@@ -30,7 +39,8 @@ Sample call:
 
 ./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' \
   -o 'i made this' \
-  -n 'my-project-no-spaces' \
+  -d 'my-project-clone-dir' \
+  -n 'my project' \
   -a 'Matthew Carter' \
   -g 'Fake Name'
 ```
