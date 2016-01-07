@@ -57,7 +57,7 @@ any of the option parameters other than '-g'.
 
 Sample call:
 
-./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git -o 'i made this' -n 'my project' -a 'Matthew Carter' -g 'Fake Name'
+./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' -o 'i made this' -n 'my project' -a 'Matthew Carter' -y 'Fake Name'
 
 EOF
             ;;
@@ -72,16 +72,24 @@ EOF
     esac
 done
 
-[ -n "${GIT}" ] || echo "Error: Missing git remote." && exit 1
-[ -n "${NAME}" ] || echo "Error: Missing project name." && exit 1
-[ -n "${NEW_NAME}" ] || echo "Error: Missing new project name." && exit 1
-#[ -n "${AUTHOR}" ] || echo "Error: Missing original author." && exit 1
-[ -n "${YOU}" ] || echo "Error: Missing your name." && exit 1
+[ -n "${GIT}" ] || (echo "Error: Missing git remote." && exit 1)
+[ -n "${NAME}" ] || (echo "Error: Missing project name." && exit 1)
+[ -n "${NEW_NAME}" ] || (echo "Error: Missing new project name." && exit 1)
+#[ -n "${AUTHOR}" ] || (echo "Error: Missing original author." && exit 1)
+[ -n "${YOU}" ] || (echo "Error: Missing your name." && exit 1)
 
-git clone "${GIT}" "./${NEW_NAME}"
+git clone "${GIT}" "./${NEW_NAME}" || (echo "Failed to clone repository, aborting." && exit 1)
 cd "${NEW_NAME}"
-find -maxdepth 1 -type f -exec sed -e "s/${NAME}/${NEW_NAME}/gi" {} \;
-find -maxdepth 1 -type f -name 'LICENSE*' -exec cp {} "${NEW_NAME}_LICENSE.md" \;
-sed -e "s/${AUTHOR}/${YOU}/gi" "${NEW_NAME}_LICENSE.md"
+find -maxdepth 9 -type f -exec sed -i.imtbak -e "s/${NAME}/${NEW_NAME}/gi" {} \;
+find -maxdepth 9 -type f -name 'LICENSE*' -exec cp {} "${NEW_NAME}_LICENSE.md" \;
+[ -f "${NEW_NAME}_LICENSE.md" ] || cp ../LICENSE.md "${NEW_NAME}_LICENSE.md"
+sed -i.imtbak -e "s/${AUTHOR}/${YOU}/gi" "${NEW_NAME}_LICENSE.md"
+find -maxdepth 9 -type f -exec sed -i.imtbak -e "s/${AUTHOR}/${AUTHOR} (modifications copyright ${YOU})/gi" {} \;
 
-find -maxdepth 1 -type f -name 'README*' -exec echo "See ${NEW_NAME}_LICENSE.md for additional copyright/license information" >> {} \;
+find -maxdepth 9 -type f -name 'README.md' -exec echo "See ${NEW_NAME}_LICENSE.md for additional copyright/license information" >> README.md \;
+find -maxdepth 9 -type f -name 'README.txt' -exec echo "See ${NEW_NAME}_LICENSE.md for additional copyright/license information" >> README.txt \;
+find -maxdepth 9 -type f -name 'README' -exec echo "See ${NEW_NAME}_LICENSE.md for additional copyright/license information" >> README \;
+
+echo "If all looks well, remove the backup sed files with:"
+echo ""
+echo "find -name '*.imtbak' -delete"
