@@ -2,7 +2,7 @@
 
 Find a project with a repurposable license, and repurpose to your own
 
-[i made this](http://weknowmemes.com/wp-content/uploads/2013/11/i-made-this-comic.jpg)
+![i made this](http://weknowmemes.com/wp-content/uploads/2013/11/i-made-this-comic.jpg)
 
 http://weknowmemes.com/2013/11/i-made-this-meme/
 
