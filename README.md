@@ -38,12 +38,14 @@ any of the option parameters other than '-g'.
 
 Sample call:
 
-./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' \
+./i-made-this.sh \
+  -g 'https://github.com/ahungry/i-made-this.git' \
   -o 'i made this' \
   -d 'my-project-clone-dir' \
   -n 'my project' \
   -a 'Matthew Carter' \
-  -g 'Fake Name'
+  -y 'Fake Name'
+
 ```
 
 # License
