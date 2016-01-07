@@ -44,7 +44,7 @@ Sample call:
   -d 'my-project-clone-dir' \
   -n 'my project' \
   -a 'Matthew Carter' \
-  -y 'Fake Name'
+  -y 'Your Name'
 
 ```
 
