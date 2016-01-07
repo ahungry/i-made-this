@@ -31,6 +31,7 @@ any of the option parameters other than '-g'.
 
   -g  The git remote/clone URL
   -o  Original project name
+  -d  Clone directory (where to place the remote files and your new ones)
   -n  New project name
   -a  Original author name
   -y  Your name
