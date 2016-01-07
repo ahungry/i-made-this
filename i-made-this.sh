@@ -18,7 +18,7 @@
 
 # Find a project with a repurposable license, and repurpose to your own
 
-while getopts ":g::o::n::a::y::h" opt; do
+while getopts ":g::o::d::n::a::y::h" opt; do
     case $opt in
         g)
             GIT="${OPTARG}"
@@ -27,6 +27,10 @@ while getopts ":g::o::n::a::y::h" opt; do
         o)
             NAME="${OPTARG}"
             echo "Original project name: ${NAME}" >&2
+            ;;
+        d)
+            CLONE="${OPTARG}"
+            echo "Clone directory: ${CLONE}" >&2
             ;;
         n)
             NEW_NAME="${OPTARG}"
@@ -51,13 +55,14 @@ any of the option parameters other than '-g'.
 
   -g  The git remote/clone URL
   -o  Original project name
+  -d  Clone directory (where to place the remote files and your new ones)
   -n  New project name
   -a  Original author name
   -y  Your name
 
 Sample call:
 
-./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' -o 'i made this' -n 'my-project-no-spaces' -a 'Matthew Carter' -y 'Fake Name'
+./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' -o 'i made this' -d 'clone-dir' -n 'my project' -a 'Matthew Carter' -y 'Your Name'
 
 EOF
             exit 0;
@@ -73,14 +78,38 @@ EOF
     esac
 done
 
-[ -n "${GIT}" ] || (echo "Error: Missing git remote." && exit 1)
-[ -n "${NAME}" ] || (echo "Error: Missing project name." && exit 1)
-[ -n "${NEW_NAME}" ] || (echo "Error: Missing new project name." && exit 1)
-#[ -n "${AUTHOR}" ] || (echo "Error: Missing original author." && exit 1)
-[ -n "${YOU}" ] || (echo "Error: Missing your name." && exit 1)
+if [ -z "${GIT}" ]; then
+    echo "Error: Missing git remote."
+    exit 1
+fi
 
-git clone "${GIT}" "./${NEW_NAME}" || (echo "Failed to clone repository, aborting." && exit 1)
-cd "${NEW_NAME}"
+if [ -z "${NAME}" ]; then
+    echo "Error: Missing project name."
+    exit 1
+fi
+
+if [ -z "${CLONE}" ]; then
+    echo "Error: Missing clone directory."
+    exit 1
+fi
+
+if [ -z "${NEW_NAME}" ]; then
+    echo "Error: Missing new project name."
+    exit 1
+fi
+
+if [ -z "${AUTHOR}" ]; then
+    echo "Error: Missing original author."
+    exit 1
+fi
+
+if [ -z "${YOU}" ]; then
+    echo "Error: Missing your name."
+    exit 1
+fi
+
+git clone "${GIT}" "./${CLONE}" || (echo "Failed to clone repository, aborting." && exit 1)
+cd "${CLONE}"
 find -maxdepth 9 -type f -exec sed -i.imtbak -e "s/${NAME}/${NEW_NAME}/gi" {} \;
 find -maxdepth 9 -type f -name 'LICENSE*' -exec cp {} "${NEW_NAME}_LICENSE.md" \;
 [ -f "${NEW_NAME}_LICENSE.md" ] || cp ../LICENSE.md "${NEW_NAME}_LICENSE.md"
