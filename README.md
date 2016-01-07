@@ -8,6 +8,8 @@ http://weknowmemes.com/2013/11/i-made-this-meme/
 
 # Usage
 
+```sh
+
 Point to a free to re-license project (MIT/BSD) and make it your own.
 
 WARNING: This is extremely alpha quality, and should be used at your own risk!
@@ -26,8 +28,11 @@ any of the option parameters other than '-g'.
 
 Sample call:
 
-```sh
-./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git -o 'i made this' -n 'my project' -a 'Matthew Carter' -g 'Fake Name'
+./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' \
+  -o 'i made this' \
+  -n 'my project' \
+  -a 'Matthew Carter' \
+  -g 'Fake Name'
 ```
 
 # License
