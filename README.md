@@ -47,6 +47,9 @@ Sample call:
   -y 'Your Name'
 
 ```
+# Copyright
+
+Copyright (C) 2015 Matthew Carter <m@ahungry.com>
 
 # License
 
