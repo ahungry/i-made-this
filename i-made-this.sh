@@ -57,9 +57,10 @@ any of the option parameters other than '-g'.
 
 Sample call:
 
-./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' -o 'i made this' -n 'my project' -a 'Matthew Carter' -y 'Fake Name'
+./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' -o 'i made this' -n 'my-project-no-spaces' -a 'Matthew Carter' -y 'Fake Name'
 
 EOF
+            exit 0;
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2

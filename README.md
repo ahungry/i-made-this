@@ -17,7 +17,7 @@ WARNING: This is extremely alpha quality, and should be used at your own risk!
 DISCLAIMER: This is intended as a joke, and not a serious effort to
 undermine anyone else's work.
 
-At this time, do *NOT* use anything but alphanumerics (and spaces) for
+At this time, do *NOT* use anything but alphanumerics (and dashes) for
 any of the option parameters other than '-g'.
 
   -g  The git remote/clone URL
@@ -30,7 +30,7 @@ Sample call:
 
 ./i-made-this.sh -g 'https://github.com/ahungry/i-made-this.git' \
   -o 'i made this' \
-  -n 'my project' \
+  -n 'my-project-no-spaces' \
   -a 'Matthew Carter' \
   -g 'Fake Name'
 ```
