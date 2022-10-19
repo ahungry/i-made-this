@@ -4,9 +4,7 @@ Find a project with a free re-licensable license, and repurpose to your own.
 
 Great for padding your past accomplishments!
 
-![i made this](http://weknowmemes.com/wp-content/uploads/2013/11/i-made-this-comic.jpg)
-
-http://weknowmemes.com/2013/11/i-made-this-meme/
+![i made this](https://github.com/ahungry/i-made-this/blob/master/i-made-this.jpg)
 
 # Usage
 
